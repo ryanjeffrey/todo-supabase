@@ -16,7 +16,9 @@ export function renderTodo(todo, handleComplete) {
     div.append(p);
 
     // add event listener for click and call handleComplete function
-    
+    div.addEventListener('click', () => {
+        handleComplete(todo);
+    });
     // return the div
     return div;
 }
