@@ -27,7 +27,12 @@ export async function getTodos() {
 
 export async function completeTodo(id) {
     // find the and update (set complete to true), the todo that matches the correct id
-
+    const response = await client
+        .from('todos')
+        .update({ complete: true })
+        .match({ 
+            user_id: client.auth.user().id,
+            id });
     return checkError(response);
 }
 
