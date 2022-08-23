@@ -37,11 +37,26 @@ todoForm.addEventListener('submit', async (e) => {
 });
 
 // create todo state
-
+let todos = [];
 // add async complete todo handler function
+async function handleComplete(todo) {
+    const update = {
+        complete: true,
+    };
     // call completeTodo
-    // swap out todo in array
-    // call displayTodos
+    const response = await completeTodo(todo.id, update);
+    if (response.error) {
+        console.log(response.error);
+    } else {
+        const completed = response.data;
+
+        // swap out todo in array
+        const index = todos.indexOf(todo);
+        todos[index] = completed;
+        // call displayTodos
+        displayTodos();
+    }
+}
    
 
 async function displayTodos() {
@@ -51,7 +66,7 @@ async function displayTodos() {
     const todos = await getTodos();
     for (let todo of todos) {
         // call render function, pass in state and complete handler function!
-        const renderedTodo = renderTodo(todo);
+        const renderedTodo = renderTodo(todo, handleComplete);
         // append to .todos
         todosEl.append(renderedTodo);
     }
