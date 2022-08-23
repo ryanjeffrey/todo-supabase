@@ -23,7 +23,6 @@ todoForm.addEventListener('submit', async (e) => {
     const todo = formData.get('todo');
 
     const response = await createTodo(todo);
-    console.log(response);
 
     todoForm.reset();
 
@@ -74,8 +73,6 @@ async function displayTodos() {
 }
 
 // add page load function
-
-
 async function loadData() {
     // fetch the todos and store in state
     // call displayTodos
