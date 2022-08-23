@@ -90,7 +90,14 @@ logoutButton.addEventListener('click', () => {
 
 
 deleteButton.addEventListener('click', async () => {
+    const message = 'Are you sure you want to delete all todos?';
+    if (!confirm(message)) return;
     // delete all todos
+    const response = await deleteAllTodos();
     // modify state to match
+    if (!response.error) {
+        todos = [];
+    }
     // re displayTodos
+    displayTodos();
 });
